@@ -43,7 +43,7 @@ Edit an employee's details.
 Delete an employee.  
 Generate a salary slip.  
 Search employees by department.  
-**3. Exit:** Quit the system.
+**3. Exit:** Quit the system.  
 **Sample**  
 ```Enter Employee Details:
 ID: 101
@@ -52,12 +52,12 @@ Department: IT
 Salary: 60000
 
 Employee Added Successfully!```
-```Displaying Employees
+Displaying Employees
 List of Employees:
 ID        Name                Department          Salary
 ---------------------------------------------------------
 101       John Doe            IT                  60000.00```
-```Generating a Salary Slip
+Generating a Salary Slip
 Enter Employee ID for Salary Slip: 101
 
 ================ Salary Slip =================
