@@ -22,7 +22,7 @@ This command will generate an executable file named EmployeeManagementSystem.
 After successful compilation, execute the program by running:  
 **./EmployeeManagementSystem**  
 Follow the on-screen instructions to use the system.   
-#### ** Special Requirements**  
+#### **Special Requirements**  
 **Libraries Used:**  
 This project uses the following standard libraries:  
 **iostream:** For input and output operations.  
@@ -44,19 +44,19 @@ Delete an employee.
 Generate a salary slip.  
 Search employees by department.  
 **3. Exit:** Quit the system.  
-**Sample**  
+**Sample:**  
 ```Enter Employee Details:
 ID: 101
 Name: John Doe
 Department: IT
 Salary: 60000
 
-Employee Added Successfully!```
+Employee Added Successfully!
 Displaying Employees
 List of Employees:
 ID        Name                Department          Salary
 ---------------------------------------------------------
-101       John Doe            IT                  60000.00```
+101       John Doe            IT                  60000.00
 Generating a Salary Slip
 Enter Employee ID for Salary Slip: 101
 
