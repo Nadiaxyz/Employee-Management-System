@@ -25,10 +25,10 @@ Follow the on-screen instructions to use the system.
 #### ** Special Requirements**  
 **Libraries Used:**  
 This project uses the following standard libraries:  
-**<iostream>:** For input and output operations.  
-**<iomanip>:** For formatted output.  
-**<string>:** To handle employee names and departments.  
-**<queue>:** For breadth-first search when searching by department.
+**iostream:** For input and output operations.  
+**iomanip:** For formatted output.  
+**string:** To handle employee names and departments.  
+**queue:** For breadth-first search when searching by department.
 ##### **Admin Credentials**
 To access the system, use the following credentials:
 Username: **admin**
