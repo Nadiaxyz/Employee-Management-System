@@ -4,7 +4,7 @@
 #include <queue> // For breadth-first search in searchByDepartment
 using namespace std;
 
-// Employee Node for Linked List
+// Employee Node 
 struct Employee {
     int id;
     string name;
