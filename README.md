@@ -29,22 +29,22 @@ This project uses the following standard libraries:
 **iomanip:** For formatted output.  
 **string:** To handle employee names and departments.  
 **queue:** For breadth-first search when searching by department.
-##### **Admin Credentials**
-To access the system, use the following credentials:
-Username: **admin**
+##### **Admin Credentials**  
+To access the system, use the following credentials:  
+Username: **admin**  
 Password: **password**
-###### **System Workflow**
-**1. Login:** Authenticate using the admin credentials.
-**2. Main Menu:**
-Insert a new employee.
-Display all employees.
-Search for an employee by ID.
-Edit an employee's details.
-Delete an employee.
-Generate a salary slip.
-Search employees by department.
+###### **System Workflow**  
+**1. Login:** Authenticate using the admin credentials.  
+**2. Main Menu:**  
+Insert a new employee.  
+Display all employees.  
+Search for an employee by ID.  
+Edit an employee's details.  
+Delete an employee.  
+Generate a salary slip.  
+Search employees by department.  
 **3. Exit:** Quit the system.
-####### **Sample**
+####### **Sample**  
 **Adding an Employee**
 ```Enter Employee Details:
 ID: 101
