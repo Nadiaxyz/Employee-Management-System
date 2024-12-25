@@ -1,5 +1,5 @@
-![image](https://github.com/user-attachments/assets/76c0eeaf-d10b-4529-8151-cafae5ed451a)# **Employee-Management-System**
-This project is an Employee Management System implemented in C++. It allows administrators to manage employee details using a binary search tree structure. The system includes functionality to add, edit, delete, search, and display employees, as well as generate salary slips and search employees by department.
+# **Employee-Management-System**
+This project is an Employee Management System implemented in C++. It allows administrators to manage employee details using a binary search tree structure. The system includes functionality to add, edit, delete, search, and display employees, as well as generate salary slips and search employees by department.  
 ## **Features**
 1. **Admin Login:** Secure access to the system using predefined credentials.
 2. **Employee Management:** Add, edit, delete, and search employees.
