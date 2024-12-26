@@ -1,7 +1,6 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include <queue> // For breadth-first search in searchByDepartment
 using namespace std;
 
 // Employee Node 
@@ -156,16 +155,16 @@ void displayEmployees(Employee* node) {
 
 void printEmployee(Employee* emp) {
     cout << left << setw(10) << emp->id
-         << setw(20) << emp->name
-         << setw(20) << emp->department
-         << setw(10) << fixed << setprecision(2) << emp->salary << endl;
+        << setw(20) << emp->name
+        << setw(20) << emp->department
+        << setw(10) << fixed << setprecision(2) << emp->salary << endl;
 }
 
 void displayTableHeader() {
     cout << left << setw(10) << "ID"
-         << setw(20) << "Name"
-         << setw(20) << "Department"
-         << setw(10) << "Salary" << endl;
+        << setw(20) << "Name"
+        << setw(20) << "Department"
+        << setw(10) << "Salary" << endl;
     cout << string(60, '-') << endl;
 }
 
@@ -180,7 +179,8 @@ void searchEmployee() {
         cout << "\n\tEmployee Found:\n";
         displayTableHeader();
         printEmployee(emp);
-    } else {
+    }
+    else {
         cout << "\n\tEmployee Not Found.\n";
     }
 }
@@ -204,7 +204,8 @@ void editEmployee() {
             cout << "\n\tInvalid input! Please enter a valid number for salary: ";
         }
         cout << "\n\tEmployee Details Updated Successfully!\n";
-    } else {
+    }
+    else {
         cout << "\n\tEmployee Not Found.\n";
     }
 }
@@ -218,10 +219,10 @@ void deleteEmployee() {
 }
 
 Employee* deleteNode(Employee* node, int id) {
-    if (node == nullptr){
-    	cout << "\n\tEmployee Not Found.\n";
+    if (node == nullptr) {
+        cout << "\n\tEmployee Not Found.\n";
         return node;
-	} 
+    }
 
     if (id < node->id)
         node->left = deleteNode(node->left, id);
@@ -233,15 +234,13 @@ Employee* deleteNode(Employee* node, int id) {
             delete node;
             cout << "\n\tEmployee Deleted Successfully!\n";
             return temp;
-        } else if (node->right == nullptr) {
+        }
+        else if (node->right == nullptr) {
             Employee* temp = node->left;
             delete node;
             cout << "\n\tEmployee Deleted Successfully!\n";
             return temp;
         }
-        else {
-        cout << "\n\tEmployee Not Found.\n";
-    }
 
         Employee* successor = node->right;
         while (successor->left != nullptr)
@@ -272,55 +271,72 @@ void generateSalarySlip() {
         cout << "\tDepartment: " << emp->department << endl;
         cout << "\tSalary: $" << fixed << setprecision(2) << emp->salary << endl;
         cout << "\t============================================\n";
-    } else {
+    }
+    else {
         cout << "\n\tEmployee Not Found.\n";
     }
 }
 
-// Search Employees by Department
-void searchByDepartment() {
-    string department;
-    cout << "\n\tEnter Department to Search: ";
-    cin.ignore(10000, '\n');
-    getline(cin, department);
+// Define a custom Queue structure
+struct QueueNode {
+    Employee* emp;
+    QueueNode* next;
+};
 
-    cout << "\n\tEmployees in Department: " << department << "\n";
-    displayTableHeader();
+struct Queue {
+    QueueNode* front;
+    QueueNode* rear;
 
-    bool found = false;
-    queue<Employee*> q;
-    if (root) q.push(root);
+    Queue() : front(nullptr), rear(nullptr) {}
 
-    while (!q.empty()) {
-        Employee* current = q.front();
-        q.pop();
+    void enqueue(Employee* emp) {
+        QueueNode* newNode = new QueueNode;
+        newNode->emp = emp;
+        newNode->next = nullptr;
 
-        if (current->department == department) {
-            printEmployee(current);
-            found = true;
+        if (rear == nullptr) {
+            front = rear = newNode;
         }
-
-        if (current->left) q.push(current->left);
-        if (current->right) q.push(current->right);
+        else {
+            rear->next = newNode;
+            rear = newNode;
+        }
     }
 
-    if (!found)
-        cout << "\n\tNo Employees Found in this Department.\n";
-}
+    Employee* dequeue() {
+        if (front == nullptr) {
+            return nullptr;
+        }
 
-// Main Menu Function
+        QueueNode* temp = front;
+        front = front->next;
+
+        if (front == nullptr) {
+            rear = nullptr;
+        }
+
+        Employee* emp = temp->emp;
+        delete temp;
+        return emp;
+    }
+
+    bool isEmpty() {
+        return front == nullptr;
+    }
+};
+
+// Main Menu
 void mainMenu() {
     int choice;
     do {
-        cout << "\n\t========= Employee Management System =========\n";
+        cout << "\n\t================ Employee Management System =================\n";
         cout << "\t1. Insert Employee\n";
         cout << "\t2. Display All Employees\n";
         cout << "\t3. Search Employee\n";
         cout << "\t4. Edit Employee\n";
         cout << "\t5. Delete Employee\n";
         cout << "\t6. Generate Salary Slip\n";
-        cout << "\t7. Search by Department\n";
-        cout << "\t8. Exit\n";
+        cout << "\t7. Exit\n";
         cout << "\tEnter your choice: ";
         choice = getValidatedInput();
 
@@ -329,13 +345,9 @@ void mainMenu() {
             insertEmployee();
             break;
         case 2:
-            if (root == nullptr)
-                cout << "\n\tNo Employees to Display.\n";
-            else {
-                cout << "\n\tList of Employees:\n";
-                displayTableHeader();
-                displayEmployees(root);
-            }
+            cout << "\n\tEmployee Details:\n";
+            displayTableHeader();
+            displayEmployees(root);
             break;
         case 3:
             searchEmployee();
@@ -350,20 +362,16 @@ void mainMenu() {
             generateSalarySlip();
             break;
         case 7:
-            searchByDepartment();
-            break;
-        case 8:
             cout << "\n\tExiting System. Goodbye!\n";
-            return;
+            break;
         default:
             cout << "\n\tInvalid choice! Please select a valid option.\n";
-            break;
         }
-    } while (true);
+    } while (choice != 7);
 }
 
+// Main Function
 int main() {
     adminLogin();
     return 0;
 }
-
