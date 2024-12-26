@@ -278,6 +278,7 @@ void generateSalarySlip() {
 }
 
 // Define a custom Queue structure
+// Define the custom Queue structure
 struct QueueNode {
     Employee* emp;
     QueueNode* next;
@@ -286,8 +287,9 @@ struct QueueNode {
 struct Queue {
     QueueNode* front;
     QueueNode* rear;
-
-    Queue() : front(nullptr), rear(nullptr) {}
+    Queue() {
+    	front=NULL, rear=NULL;
+	}
 
     void enqueue(Employee* emp) {
         QueueNode* newNode = new QueueNode;
@@ -296,8 +298,7 @@ struct Queue {
 
         if (rear == nullptr) {
             front = rear = newNode;
-        }
-        else {
+        } else {
             rear->next = newNode;
             rear = newNode;
         }
@@ -310,11 +311,9 @@ struct Queue {
 
         QueueNode* temp = front;
         front = front->next;
-
         if (front == nullptr) {
             rear = nullptr;
         }
-
         Employee* emp = temp->emp;
         delete temp;
         return emp;
@@ -325,7 +324,38 @@ struct Queue {
     }
 };
 
-// Main Menu
+// `searchByDepartment` 
+void searchByDepartment() {
+    string department;
+    cout << "\n\tEnter Department to Search: ";
+    cin.ignore(10000, '\n');
+    getline(cin, department);
+
+    cout << "\n\tEmployees in Department: " << department << "\n";
+    displayTableHeader();
+
+    bool found = false;
+
+    // Use the Queue struct to perform level-order traversal
+    Queue q;  // Create a Queue instance
+    if (root) q.enqueue(root);
+
+    while (!q.isEmpty()) {
+        Employee* current = q.dequeue();
+
+        if (current->department == department) {
+            printEmployee(current);
+            found = true;
+        }
+        if (current->left) q.enqueue(current->left);
+        if (current->right) q.enqueue(current->right);
+    }
+
+    if (!found)
+        cout << "\n\tNo Employees Found in this Department.\n";
+}
+
+// Update Main Menu to include search by department
 void mainMenu() {
     int choice;
     do {
@@ -336,7 +366,8 @@ void mainMenu() {
         cout << "\t4. Edit Employee\n";
         cout << "\t5. Delete Employee\n";
         cout << "\t6. Generate Salary Slip\n";
-        cout << "\t7. Exit\n";
+        cout << "\t7. Search by Department\n";  // Added this option
+        cout << "\t8. Exit\n";
         cout << "\tEnter your choice: ";
         choice = getValidatedInput();
 
@@ -362,12 +393,15 @@ void mainMenu() {
             generateSalarySlip();
             break;
         case 7:
+            searchByDepartment();  // Call the new function
+            break;
+        case 8:
             cout << "\n\tExiting System. Goodbye!\n";
             break;
         default:
             cout << "\n\tInvalid choice! Please select a valid option.\n";
         }
-    } while (choice != 7);
+    } while (choice != 8);
 }
 
 // Main Function
